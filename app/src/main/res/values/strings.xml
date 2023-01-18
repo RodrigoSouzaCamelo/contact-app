@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Contact App</string>
+    <string name="add_new_contact">Adicionar novo contato</string>
+    <string name="sign_out">Deslogar</string>
 </resources>
