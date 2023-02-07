@@ -2,4 +2,14 @@
     <string name="app_name">Contact App</string>
     <string name="add_new_contact">Adicionar novo contato</string>
     <string name="sign_out">Deslogar</string>
+    <string name="birthday">Aniversário</string>
+    <string name="add_picture">Adicionar foto</string>
+    <string name="contact_profile_picture">Foto de perfil do contato</string>
+    <string name="name">Nome</string>
+    <string name="last_name">Sobrenome</string>
+    <string name="phone">Telefone</string>
+    <string name="save">Salvar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="url_picture">Link da Image</string>
+    <string name="title_registration_contact">Adicionar Contato</string>
 </resources>
