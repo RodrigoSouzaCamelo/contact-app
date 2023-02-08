@@ -9,12 +9,11 @@ import br.com.rodrigo.contactapp.ui.screens.home.HomeScreen
 fun NavGraphBuilder.homeGraph(
     navController: NavHostController
 ) {
-    navigation(
-        startDestination = AppDestination.Home.route,
-        route = AppDestination.Default.route,
-    ) {
-        composable(route = AppDestination.Home.route) {
-            HomeScreen()
-        }
+    composable(route = AppDestination.Home.route) {
+        HomeScreen(
+            onClickRegistration = {
+                navController.navigateToFormContact()
+            }
+        )
     }
 }

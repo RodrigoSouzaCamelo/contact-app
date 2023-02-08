@@ -1,11 +1,14 @@
 package br.com.rodrigo.contactapp.ui.screens.home
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -15,22 +18,27 @@ import br.com.rodrigo.contactapp.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    modifier: Modifier = Modifier,
     onClickSignOut: () -> Unit = {},
     onClickRegistration: () -> Unit = {},
 ) {
     Scaffold(
         topBar = { HomeAppBar(onClickSignOut) },
         floatingActionButton = { HomeFloatActionButton(onClickRegistration) }
-    ) {
+    ) { paddingValues ->
 
+        LazyColumn(modifier.padding(paddingValues)) {
+
+        }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeAppBar(onClickSignOut: () -> Unit) {
-    SmallTopAppBar(
+    TopAppBar(
         title = { Text(text = stringResource(id = R.string.app_name)) },
-        colors = TopAppBarDefaults.smallTopAppBarColors(
+        colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,
             titleContentColor = Color.White
         ),
