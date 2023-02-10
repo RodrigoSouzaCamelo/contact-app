@@ -22,7 +22,6 @@ class FormContactViewModel(
 
 
     init {
-
         _uiState.update { state ->
             state.copy(onChangeName = {
                 _uiState.value = _uiState.value.copy(
