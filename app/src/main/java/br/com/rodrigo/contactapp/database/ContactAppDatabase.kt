@@ -13,11 +13,20 @@ import br.com.rodrigo.contactapp.models.Contact
 abstract class ContactAppDatabase : RoomDatabase() {
     abstract fun contactDAO(): ContactDAO
 
-    fun getDatabase(context: Context): ContactAppDatabase {
-        return Room.databaseBuilder(
-            context,
-            ContactAppDatabase::class.java,
-            "ContactApp.db"
-        ).build()
+    companion object {
+        private var INSTANCE: ContactAppDatabase? = null
+
+        fun getInstance(context: Context): ContactAppDatabase {
+            if(INSTANCE == null) {
+                INSTANCE = Room
+                    .databaseBuilder(
+                        context,
+                        ContactAppDatabase::class.java,
+                        "ContactApp.db"
+                ).build()
+            }
+
+            return INSTANCE as ContactAppDatabase
+        }
     }
 }

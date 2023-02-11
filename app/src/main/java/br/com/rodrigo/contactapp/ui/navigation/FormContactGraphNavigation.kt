@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -15,6 +16,7 @@ import br.com.rodrigo.contactapp.R
 import br.com.rodrigo.contactapp.ui.screens.formcontact.FormContactScreen
 import br.com.rodrigo.contactapp.ui.screens.formcontact.FormContactViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.formContactGraph(
@@ -43,10 +45,15 @@ fun NavGraphBuilder.formContactGraph(
                 )
             }
 
+            val coroutineScope = rememberCoroutineScope()
+
             FormContactScreen(
                 state = state,
                 onClickSave = {
-                    navController.popBackStack()
+                    coroutineScope.launch {
+                        viewModel.save()
+                        navController.popBackStack()
+                    }
                 },
                 onLoadImage = {
                     viewModel.loadImage(it)

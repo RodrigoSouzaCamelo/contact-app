@@ -2,15 +2,23 @@ package br.com.rodrigo.contactapp.ui.screens.formcontact
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import br.com.rodrigo.contactapp.database.ContactDAO
 import br.com.rodrigo.contactapp.extensions.convertToDate
 import br.com.rodrigo.contactapp.extensions.convertToString
+import br.com.rodrigo.contactapp.models.Contact
 import br.com.rodrigo.contactapp.util.CONTACT_ID
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FormContactViewModel(
+@HiltViewModel
+class FormContactViewModel @Inject constructor(
+    private val contactDAO: ContactDAO,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -53,6 +61,21 @@ class FormContactViewModel(
                     showBoxDialogDate = it
                 )
             })
+        }
+    }
+
+    suspend fun save() {
+        viewModelScope.launch {
+            with(_uiState.value) {
+                var contact = Contact(
+                    name = name,
+                    lastname = lastname,
+                    profilePicture = profilePicture,
+                    birthday = birthday,
+                    phone = phone
+                )
+                contactDAO.insert(contact)
+            }
         }
     }
 
