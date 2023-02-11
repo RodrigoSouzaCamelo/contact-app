@@ -2,6 +2,7 @@ package br.com.rodrigo.contactapp.ui.screens.home
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -14,10 +15,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.rodrigo.contactapp.R
+import br.com.rodrigo.contactapp.sampleData.contactsSample
+import br.com.rodrigo.contactapp.ui.components.ContactItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    state: HomeUiState,
     modifier: Modifier = Modifier,
     onClickSignOut: () -> Unit = {},
     onClickRegistration: () -> Unit = {},
@@ -28,7 +32,9 @@ fun HomeScreen(
     ) { paddingValues ->
 
         LazyColumn(modifier.padding(paddingValues)) {
-
+            items(state.contacts) { contact ->
+                ContactItem(contact)
+            }
         }
     }
 }
@@ -73,5 +79,5 @@ fun HomeFloatActionButton(onClickRegistration: () -> Unit = {}) {
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(state =  HomeUiState(contactsSample))
 }
