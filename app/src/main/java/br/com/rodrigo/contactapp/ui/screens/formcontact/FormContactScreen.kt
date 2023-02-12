@@ -32,6 +32,7 @@ import androidx.compose.material3.OutlinedTextField
 import br.com.rodrigo.contactapp.R
 import br.com.rodrigo.contactapp.ui.components.ImageBoxDialog
 import br.com.rodrigo.contactapp.ui.components.boxDialogDate
+import br.com.rodrigo.contactapp.ui.screens.formcontact.components.FormContactAppBar
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
@@ -50,11 +51,10 @@ fun FormContactScreen(
                 FormContactAppBar(stringResource(id = title))
             }
         },
-
-        ) { paddingValues ->
+    ) { paddingValues ->
 
         Column(
-            modifier
+            modifier = modifier
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
@@ -66,18 +66,17 @@ fun FormContactScreen(
                     .weight(1f)
             ) {
                 AsyncImage(
-                    modifier = Modifier
-                        .size(180.dp)
-                        .clip(CircleShape)
-                        .clickable {
-                            state.onShowImageBoxDialog(true)
-                        },
-                    model = ImageRequest.Builder(LocalContext.current)
+                    model = ImageRequest
+                        .Builder(LocalContext.current)
                         .data(state.profilePicture).build(),
                     placeholder = painterResource(R.drawable.default_profile_picture),
                     error = painterResource(R.drawable.default_profile_picture),
                     contentScale = ContentScale.Crop,
                     contentDescription = stringResource(id = R.string.contact_profile_picture),
+                    modifier = Modifier
+                        .size(180.dp)
+                        .clip(CircleShape)
+                        .clickable { state.onShowImageBoxDialog(true) }
                 )
                 Text(
                     text = stringResource(R.string.add_picture),
@@ -85,12 +84,12 @@ fun FormContactScreen(
                 )
             }
             Column(
-                Modifier
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .weight(2f),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                val focuAtual = LocalFocusManager.current
+                val currentFocus = LocalFocusManager.current
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
                     leadingIcon = {
@@ -106,7 +105,7 @@ fun FormContactScreen(
                         capitalization = KeyboardCapitalization.Words,
                         imeAction = ImeAction.Next
                     ),
-                    keyboardActions = (KeyboardActions(onNext = { focuAtual.moveFocus(FocusDirection.Next) }))
+                    keyboardActions = (KeyboardActions(onNext = { currentFocus.moveFocus(FocusDirection.Next) }))
                 )
 
                 OutlinedTextField(
@@ -114,11 +113,11 @@ fun FormContactScreen(
                     value = state.lastname,
                     onValueChange = state.onChangeLastname,
                     label = { Text(stringResource(id = R.string.last_name)) },
+                    keyboardActions = (KeyboardActions(onNext = { currentFocus.moveFocus(FocusDirection.Next) })),
                     keyboardOptions = KeyboardOptions(
                         capitalization = KeyboardCapitalization.Words,
                         imeAction = ImeAction.Next
                     ),
-                    keyboardActions = (KeyboardActions(onNext = { focuAtual.moveFocus(FocusDirection.Next) }))
                 )
 
                 OutlinedTextField(
@@ -136,7 +135,7 @@ fun FormContactScreen(
                         keyboardType = KeyboardType.Phone,
                         imeAction = ImeAction.Next
                     ),
-                    keyboardActions = (KeyboardActions(onNext = { focuAtual.clearFocus() }))
+                    keyboardActions = (KeyboardActions(onNext = { currentFocus.clearFocus() }))
                 )
 
                 OutlinedButton(
@@ -147,19 +146,19 @@ fun FormContactScreen(
                     Icon(
                         imageVector = Icons.Default.DateRange,
                         contentDescription = null,
-                        Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp)
                     )
                     Text(text = state.textBirthday)
                 }
 
 
-                Spacer(Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Button(
+                    onClick = onClickSave,
                     modifier = Modifier
                         .fillMaxWidth()
                         .heightIn(56.dp),
-                    onClick = onClickSave
                 ) {
                     Text(text = stringResource(R.string.save))
                 }
@@ -184,14 +183,6 @@ fun FormContactScreen(
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun FormContactAppBar(titleAppBar: String) {
-    TopAppBar(
-        title = { Text(text = titleAppBar) },
-    )
 }
 
 @Preview
