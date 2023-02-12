@@ -1,4 +1,4 @@
-package br.com.rodrigo.contactapp.ui.screens.formcontact.components
+package br.com.rodrigo.contactapp.ui.screens.form.components
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text

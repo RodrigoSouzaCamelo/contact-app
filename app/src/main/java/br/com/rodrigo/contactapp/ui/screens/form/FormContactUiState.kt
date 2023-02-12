@@ -1,4 +1,4 @@
-package br.com.rodrigo.contactapp.ui.screens.formcontact
+package br.com.rodrigo.contactapp.ui.screens.form
 
 import androidx.annotation.StringRes
 import br.com.rodrigo.contactapp.R

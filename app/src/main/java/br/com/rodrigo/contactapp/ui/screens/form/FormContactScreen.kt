@@ -1,4 +1,4 @@
-package br.com.rodrigo.contactapp.ui.screens.formcontact
+package br.com.rodrigo.contactapp.ui.screens.form
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -32,7 +32,7 @@ import androidx.compose.material3.OutlinedTextField
 import br.com.rodrigo.contactapp.R
 import br.com.rodrigo.contactapp.ui.components.ImageBoxDialog
 import br.com.rodrigo.contactapp.ui.components.boxDialogDate
-import br.com.rodrigo.contactapp.ui.screens.formcontact.components.FormContactAppBar
+import br.com.rodrigo.contactapp.ui.screens.form.components.FormContactAppBar
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
