@@ -13,8 +13,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import br.com.rodrigo.contactapp.R
-import br.com.rodrigo.contactapp.ui.screens.formcontact.FormContactScreen
-import br.com.rodrigo.contactapp.ui.screens.formcontact.FormContactViewModel
+import br.com.rodrigo.contactapp.ui.screens.form.FormContactScreen
+import br.com.rodrigo.contactapp.ui.screens.form.FormContactViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
 
