@@ -21,6 +21,5 @@ data class FormContactUiState (
     val onShowImageBoxDialog: (show: Boolean) -> Unit = {},
     val onShowBoxDialogDate: (show: Boolean) -> Unit = {},
     val textBirthday: String = "",
-    @StringRes
-    val titleAppbar: Int? = R.string.title_registration_contact,
+    @StringRes val titleAppbar: Int? = R.string.title_registration_contact,
 )

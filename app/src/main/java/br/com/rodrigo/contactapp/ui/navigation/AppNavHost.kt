@@ -20,9 +20,14 @@ fun AppNavHost(
     ) {
         homeGraph(navController)
         formContactGraph(navController)
+        contactDetailsGraph(navController)
     }
 }
 
 fun NavHostController.navigateToFormContact(contactId: Long = 0L) {
     navigate("${AppDestination.FormContact.route}/$contactId")
+}
+
+fun NavHostController.navigateToContactDetails(contactId: Long) {
+    navigate("${AppDestination.ContactDetails.route}/$contactId")
 }

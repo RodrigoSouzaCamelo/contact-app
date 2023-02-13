@@ -19,6 +19,9 @@ fun NavGraphBuilder.homeGraph(
 
         HomeScreen(
             state = state,
+            onClickOpenDetails = {
+                navController.navigateToContactDetails(it)
+            },
             onClickRegistration = {
                 navController.navigateToFormContact()
             }
