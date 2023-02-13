@@ -18,6 +18,7 @@ fun HomeScreen(
     state: HomeUiState,
     modifier: Modifier = Modifier,
     onClickSignOut: () -> Unit = {},
+    onClickOpenDetails: (Long) -> Unit = {},
     onClickRegistration: () -> Unit = {},
 ) {
     Scaffold(
@@ -27,7 +28,10 @@ fun HomeScreen(
 
         LazyColumn(modifier.padding(paddingValues)) {
             items(state.contacts) { contact ->
-                ContactItem(contact)
+                ContactItem(
+                    contact = contact,
+                    onClick = onClickOpenDetails
+                )
             }
         }
     }

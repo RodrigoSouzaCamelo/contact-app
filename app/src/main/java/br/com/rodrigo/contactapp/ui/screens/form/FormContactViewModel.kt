@@ -3,16 +3,14 @@ package br.com.rodrigo.contactapp.ui.screens.form
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.rodrigo.contactapp.R
 import br.com.rodrigo.contactapp.database.ContactDAO
 import br.com.rodrigo.contactapp.extensions.convertToDate
 import br.com.rodrigo.contactapp.extensions.convertToString
 import br.com.rodrigo.contactapp.models.Contact
 import br.com.rodrigo.contactapp.util.CONTACT_ID
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,8 +26,9 @@ class FormContactViewModel @Inject constructor(
     val uiState: StateFlow<FormContactUiState>
         get() = _uiState.asStateFlow()
 
-
     init {
+        viewModelScope.launch { loadContact() }
+
         _uiState.update { state ->
             state.copy(onChangeName = {
                 _uiState.value = _uiState.value.copy(
@@ -64,15 +63,41 @@ class FormContactViewModel @Inject constructor(
         }
     }
 
+    private suspend fun loadContact() {
+        contactId?.let { id ->
+            val contactFlow = contactDAO.getById(id)
+            contactFlow.collect { contact ->
+                contact?.let { setContactInUiState(it) }
+            }
+        }
+    }
+
+    private fun setContactInUiState(contact: Contact) {
+        _uiState.update { state ->
+            with(contact) {
+                state.copy(
+                    id = id,
+                    name = name,
+                    lastname = lastname,
+                    phone = phone,
+                    profilePicture = profilePicture,
+                    birthday = birthday,
+                    titleAppbar = R.string.title_edit_contact
+                )
+            }
+        }
+    }
+
     suspend fun save() {
         viewModelScope.launch {
             with(_uiState.value) {
                 var contact = Contact(
+                    id = id,
                     name = name,
                     lastname = lastname,
                     profilePicture = profilePicture,
                     birthday = birthday,
-                    phone = phone
+                    phone = phone,
                 )
                 contactDAO.insert(contact)
             }
@@ -80,10 +105,10 @@ class FormContactViewModel @Inject constructor(
     }
 
     fun setBirthdayText(textBirthday: String) {
-        val textoAniversairo = _uiState.value.birthday?.convertToString() ?: textBirthday
+        val textBirthdayFormatted = _uiState.value.birthday?.convertToString() ?: textBirthday
 
         _uiState.update {
-            it.copy(textBirthday = textoAniversairo)
+            it.copy(textBirthday = textBirthdayFormatted)
         }
     }
 
