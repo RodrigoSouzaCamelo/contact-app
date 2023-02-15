@@ -1,4 +1,4 @@
-package br.com.rodrigo.contactapp.ui.activities
+package br.com.rodrigo.contactapp
 
 import android.os.Build
 import android.os.Bundle
