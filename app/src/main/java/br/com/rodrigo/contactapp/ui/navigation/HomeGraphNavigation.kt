@@ -6,7 +6,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import br.com.rodrigo.contactapp.ui.screens.home.HomeScreen
 import br.com.rodrigo.contactapp.ui.screens.home.HomeViewModel
 
