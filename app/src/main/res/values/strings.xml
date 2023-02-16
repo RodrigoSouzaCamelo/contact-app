@@ -22,4 +22,9 @@
     <string name="contact_deleted">Contato apagado</string>
     <string name="title_edit_contact">Editar Contato</string>
     <string name="app_logo">Logo do aplicativo</string>
+    <string name="password">Senha</string>
+    <string name="login">Entrar</string>
+    <string name="user">Usuário</string>
+    <string name="incorrect_user_or_password">Usuário ou senha incorreto</string>
+    <string name="create_new_account">Criar conta</string>
 </resources>
