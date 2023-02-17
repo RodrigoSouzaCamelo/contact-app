@@ -15,13 +15,18 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = AppDestination.Home.route,
+        startDestination = AppDestination.Login.route,
         modifier = modifier
     ) {
+        loginGraph(navController)
         homeGraph(navController)
         formContactGraph(navController)
         contactDetailsGraph(navController)
     }
+}
+
+fun NavHostController.navigateClean(route: String) = this.navigate(route) {
+    popUpTo(0)
 }
 
 fun NavHostController.navigateToFormContact(contactId: Long = 0L) {

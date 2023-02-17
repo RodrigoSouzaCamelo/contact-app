@@ -4,10 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.rodrigo.contactapp.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     state: LoginUiState,
@@ -39,7 +40,6 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-
         ) {
             Image(
                 painter = painterResource(id = R.drawable.helloapp_logo_blue),
@@ -51,8 +51,8 @@ fun LoginScreen(
 
             Text(
                 text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.h6,
-                color = MaterialTheme.colors.primary
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.primary,
             )
         }
 
@@ -67,7 +67,7 @@ fun LoginScreen(
                     text = stringResource(R.string.incorrect_user_or_password),
                     textAlign = TextAlign.Center,
                     color = Color.Red,
-                    style = MaterialTheme.typography.subtitle1,
+                    style = MaterialTheme.typography.labelMedium,
                     modifier = Modifier
                         .fillMaxWidth(),
                 )
@@ -77,7 +77,8 @@ fun LoginScreen(
             OutlinedTextField(
                 trailingIcon = {
                     Icon(
-                        imageVector = Icons.Default.Person, contentDescription = null
+                        imageVector = Icons.Default.Person,
+                        contentDescription = null
                     )
                 },
                 value = state.user,
@@ -95,7 +96,8 @@ fun LoginScreen(
             OutlinedTextField(
                 trailingIcon = {
                     Icon(
-                        imageVector = Icons.Default.Lock, contentDescription = null
+                        imageVector = Icons.Default.Lock,
+                        contentDescription = null
                     )
                 },
                 value = state.password,
