@@ -27,4 +27,5 @@
     <string name="user">Usuário</string>
     <string name="incorrect_user_or_password">Usuário ou senha incorreto</string>
     <string name="create_new_account">Criar conta</string>
+    <string name="create">Criar</string>
 </resources>
