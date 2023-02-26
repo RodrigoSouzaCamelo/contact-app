@@ -24,7 +24,7 @@ fun NavGraphBuilder.homeGraph(
             onClickSignOut = {
                 coroutineScope.launch {
                     viewModel.signOut(  )
-                    navController.navegaParaLoginDeslogado()
+                    navController.navigateToLogin()
                 }
             },
             onClickOpenDetails = {
