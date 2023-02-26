@@ -10,14 +10,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import br.com.rodrigo.contactapp.ui.screens.login.LoginScreen
 import br.com.rodrigo.contactapp.ui.screens.login.LoginViewModel
+import br.com.rodrigo.contactapp.ui.screens.registration.RegistrationScreen
+import br.com.rodrigo.contactapp.ui.screens.registration.RegistrationViewModel
 import kotlinx.coroutines.launch
 
-fun NavGraphBuilder.loginGraph(
-    navController: NavHostController
-) {
-    composable(
-        route = AppDestination.Login.route,
-    ) {
+fun NavGraphBuilder.loginGraph(navController: NavHostController) {
+    composable(route = AppDestination.Login.route) {
         val viewModel = hiltViewModel<LoginViewModel>()
         val state by viewModel.uiState.collectAsState()
 
@@ -28,7 +26,6 @@ fun NavGraphBuilder.loginGraph(
         }
 
         val coroutineScope = rememberCoroutineScope()
-
         LoginScreen(
             state = state,
             onClickLogin = {
@@ -37,15 +34,24 @@ fun NavGraphBuilder.loginGraph(
                 }
             },
             onClickRegistration = {
-
+                navController.navigateClean(AppDestination.Registration.route)
             }
         )
-
     }
 
-    composable(
-        route = AppDestination.LoginForm.route,
-    ) {
+    composable(route = AppDestination.Registration.route) {
+        val viewModel = hiltViewModel<RegistrationViewModel>()
+        val state by viewModel.uiState.collectAsState()
 
+        val coroutineScope = rememberCoroutineScope()
+        RegistrationScreen(
+            state = state,
+            onSave = {
+                coroutineScope.launch {
+                    viewModel.saveLogin()
+                }
+                navController.navigateClean(AppDestination.Login.route)
+            }
+        )
     }
 }

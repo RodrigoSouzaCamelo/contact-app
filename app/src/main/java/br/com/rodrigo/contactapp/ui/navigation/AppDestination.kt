@@ -11,7 +11,7 @@ sealed class AppDestination(
     val arguments: List<NamedNavArgument> = emptyList()
 ) {
     object Login : AppDestination(route = "login")
-    object LoginForm : AppDestination(route = "login-form")
+    object Registration : AppDestination(route = "login-form")
     object Home : AppDestination(route = "home")
     object FormContact : AppDestination(
         route = "form-contact",
